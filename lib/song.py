@@ -6,6 +6,10 @@ class Song:
     genres = []
     # artists, that is equal to an empty list.
     artists = []
+    # genre count dictionary
+    genre_count = {}
+    # artist count dictionary
+    artist_count = {}
 
     def __init__(self, name, artist, genre):
         self.name = name
@@ -17,8 +21,13 @@ class Song:
         self.add_to_genres(genre)
         # artists list
         self.add_to_artists(artist)
+        # genre count
+        self.add_to_genre_count(genre)
+        # artist count
+        self.add_to_artist_count(artist)
 
     # class method increments the value of count by one
+
     @classmethod
     def add_song_to_count(cls, increment=1):
         cls.count += increment
@@ -35,6 +44,15 @@ class Song:
         if artist not in cls.artists:
             cls.artists.append(artist)
 
+    @classmethod
+    def add_to_genre_count(cls, genre):
+        # if genre exist in the dictionary, increment its count by 1. If not, add it to the dictionary with a count of 1
+        cls.genre_count[genre] = cls.genre_count.get(genre, 0) + 1
+
+    @classmethod
+    def add_to_artist_count(cls, artist):
+        cls.artist_count[artist] = cls.artist_count.get(artist, 0) + 1
+
 
 # test ur code python lib/song.py
 # song1 = Song("Song 1", "Artist 1", "Pop")
@@ -43,3 +61,6 @@ class Song:
 
 # print(Song.genres)
 # print(Song.artists)
+
+# Song.add_to_genre_count(song1.genre)
+# print(Song.genre_count)
